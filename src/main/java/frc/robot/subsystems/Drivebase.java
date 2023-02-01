@@ -20,10 +20,10 @@ public class Drivebase extends SubsystemBase {
   AHRS Gyro = new AHRS(I2C.Port.kMXP);
   CANSparkMax leftDrive1; 
   CANSparkMax leftDrive2;  
-  CANSparkMax leftDrive3;
+ // CANSparkMax leftDrive3;
   CANSparkMax rightDrive1; 
   CANSparkMax rightDrive2;
-  CANSparkMax rightDrive3;
+  // CANSparkMax rightDrive3;
   MotorControllerGroup leftDrives;  
   MotorControllerGroup rightDrives;
   private static DifferentialDrive ourDrive;
@@ -34,9 +34,9 @@ public class Drivebase extends SubsystemBase {
   public Drivebase() {
     leftDrive1 = new CANSparkMax(Constants.MOTER1, MotorType.kBrushless);
     leftDrive2 = new CANSparkMax(Constants.MOTER2, MotorType.kBrushless); 
-    leftDrive3 = new CANSparkMax(Constants.MOTER3, MotorType.kBrushless);
-    leftDrive1 = new CANSparkMax(Constants.MOTER4, MotorType.kBrushless); 
-   // leftDrive2 = new CANSparkMax(Constants.MOTER5, MotorType.kBrushless);
+    // leftDrive3 = new CANSparkMax(Constants.MOTER3, MotorType.kBrushless);
+    rightDrive1 = new CANSparkMax(Constants.MOTER3, MotorType.kBrushless); 
+    rightDrive2 = new CANSparkMax(Constants.MOTER4, MotorType.kBrushless);
    // rightDrive3 = new CANSparkMax(Constants.MOTER6, MotorType.kBrushless);
     leftDrives = new MotorControllerGroup(leftDrive1, leftDrive2);
     rightDrives = new MotorControllerGroup(rightDrive1, rightDrive2);
@@ -61,7 +61,7 @@ public class Drivebase extends SubsystemBase {
 
     leftDrive1.setInverted(true);
     leftDrive2.setInverted(true);
-    leftDrive3.setInverted(true);
+   // leftDrive3.setInverted(true);
 
 
   }

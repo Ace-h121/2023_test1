@@ -23,7 +23,7 @@ public class Controls {
     public static Trigger bButton = operator.a();
     // buttons for throttle and break
 
-  public static Trigger xButton = new JoystickButton(Driver, Constants.XBOX_BUTTON_X);  
+
 // method for getting the 
 public static double Axis(XboxController controller, int axis){
    return controller.getRawAxis(axis);

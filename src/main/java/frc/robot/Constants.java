@@ -19,10 +19,10 @@ public final class Constants {
   public final static int MOTER4 = 4;
   // public final static int MOTER5 = 5;
   // public final static int MOTER6 = 6;
-  public final static int XBOXPORT = 1;
+  public final static int XBOXPORT = 0;
   public static final double AXIS_THRESHOLD = 0.25;
   public static final int XBOX_CONTROLLER_DRIVER = 0;
-  public static final int XBOX_CONTROLLER_OPERATOR = 2;
+  public static final int XBOX_CONTROLLER_OPERATOR = 1;
 
    // Buttons
   public static final int XBOX_BUTTON_A = 1;
@@ -49,6 +49,6 @@ public final class Constants {
   public static final double DRIVE_SENSITIVITY_DEFAULT = 1;
   public static final double SPIN_SENSITIVITY = 0.8;
   public static class OperatorConstants {
-    public static final int kDriverControllerPort = 2;
+    public static final int kDriverControllerPort = 1;
   }
 }

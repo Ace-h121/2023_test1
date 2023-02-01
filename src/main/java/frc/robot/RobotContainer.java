@@ -33,6 +33,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+    m_driveBase.setDefaultCommand(drive);
   }
 
   /**
@@ -45,7 +46,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    Controls.xButton.whileFalse(drive);
+    
   }
 
 
