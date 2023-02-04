@@ -30,10 +30,12 @@ public class XboxMove extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
+  private final Drivebase drivebase;
   public XboxMove(Drivebase m_drivebase) {
+    drivebase = m_drivebase;
     // Use addRequirements() here to declare subsystem dependencies.
     
-    addRequirements(m_drivebase);
+    addRequirements(drivebase);
 
   }
 

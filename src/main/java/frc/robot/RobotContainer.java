@@ -8,8 +8,13 @@ package frc.robot;
 
 import frc.robot.Utilities.Controls;
 import frc.robot.commands.XboxMove;
+import frc.robot.commands.Arm.armForward;
+import frc.robot.commands.claw.clawDrop;
+import frc.robot.commands.claw.conePickup;
+import frc.robot.commands.claw.cubePickup;
 import frc.robot.subsystems.Drivebase;
-
+import frc.robot.subsystems.arm;
+import frc.robot.subsystems.claw;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -25,6 +30,8 @@ public class RobotContainer {
 
   private final Drivebase m_driveBase = new Drivebase();
   private final XboxMove drive = new XboxMove(m_driveBase);
+  private final claw Claw = new claw();
+  private final arm Arm = new arm();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
@@ -33,6 +40,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+    
     m_driveBase.setDefaultCommand(drive);
   }
 
@@ -46,7 +54,10 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    
+    Controls.yButton.whileTrue(new clawDrop(Claw));
+    Controls.xButton.whileTrue(new conePickup(Claw));
+    Controls.aButton.whileTrue(new cubePickup(Claw));
+    Controls.bButton.whileTrue(new armForward(Arm));
   }
 
 

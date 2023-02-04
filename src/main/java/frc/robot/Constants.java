@@ -13,13 +13,24 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+  //All motor constants
   public static final int MOTER1 = 1;
-  public final static int MOTER2 = 2;
-  public final static int MOTER3 = 3;
-  public final static int MOTER4 = 4;
-  // public final static int MOTER5 = 5;
+  public final static int MOTER2 = 3;
+  public final static int MOTER3 = 5;
+  public final static int MOTER4 = 2;
+  // public final static int MOTER5 = 4;
   // public final static int MOTER6 = 6;
-  public final static int XBOXPORT = 0;
+  public final static int MOTER7 = 7;
+  public static final int MOTER8 = 8;
+
+  // Solenoid constants
+  public static final int BREAK_SOLENOID = 0;
+  public static final int LEFT_CLAW_SOLENOID = 1;
+  public static final int RIGHT_CLAW_SOLENOID = 2;
+
+  // xbox constants
+  public final static int DRIVER_PORT = 0;
+  public final static int OPERATOR_PORT = 1;
   public static final double AXIS_THRESHOLD = 0.25;
   public static final int XBOX_CONTROLLER_DRIVER = 0;
   public static final int XBOX_CONTROLLER_OPERATOR = 1;
@@ -48,7 +59,6 @@ public final class Constants {
   public static final double DRIVE_SENSITIVITY_PRECISION = 0.5;
   public static final double DRIVE_SENSITIVITY_DEFAULT = 1;
   public static final double SPIN_SENSITIVITY = 0.8;
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 1;
-  }
+  public static final double ARM_SPEED = 1;
+
 }

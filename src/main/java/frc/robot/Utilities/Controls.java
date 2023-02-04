@@ -6,21 +6,22 @@ package frc.robot.Utilities;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants;
-import frc.robot.Constants.OperatorConstants;
+
 
 
 /** Add your docs here. */
 public class Controls { 
-    public static XboxController Driver = new XboxController(Constants.XBOXPORT);
-    private final static CommandXboxController operator = new CommandXboxController(OperatorConstants.kDriverControllerPort);
+    public static XboxController Driver = new XboxController(Constants.DRIVER_PORT);
+    private final static CommandXboxController operator = new CommandXboxController(Constants.OPERATOR_PORT);
     // binding the buttons to themselves
 
     public static Trigger yButton = operator.y();
     public static Trigger aButton = operator.a(); 
     public static Trigger bButton = operator.a();
+    public static Trigger xButton = operator.x();
+    
     // buttons for throttle and break
 
 
