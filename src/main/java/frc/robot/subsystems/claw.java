@@ -20,8 +20,8 @@ public class claw extends SubsystemBase {
 
 
   public claw() {
-    leftSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.LEFT_CLAW_SOLENOID);
-    rightSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.LEFT_CLAW_SOLENOID);
+    leftSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.solenoidConstants.LEFT_CLAW_SOLENOID);
+    rightSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.solenoidConstants.LEFT_CLAW_SOLENOID);
     toggle = false;
   }
 

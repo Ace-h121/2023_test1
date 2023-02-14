@@ -13,8 +13,8 @@ import frc.robot.Constants;
 
 /** Add your docs here. */
 public class Controls { 
-    public static XboxController Driver = new XboxController(Constants.DRIVER_PORT);
-    private final static CommandXboxController operator = new CommandXboxController(Constants.OPERATOR_PORT);
+    public static XboxController Driver = new XboxController(Constants.xboxConstants.DRIVER_PORT);
+    private final static CommandXboxController operator = new CommandXboxController(Constants.xboxConstants.OPERATOR_PORT);
     // binding the buttons to themselves
 
     public static Trigger yButton = operator.y();

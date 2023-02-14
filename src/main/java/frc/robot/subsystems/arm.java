@@ -18,15 +18,17 @@ public class arm extends SubsystemBase {
   // two motors that control the arms movement 
   private CANSparkMax leftArm;
   private CANSparkMax rightArm;
+  private CANSparkMax translationalArm;
 
   // a boolean to toggle for the breaks
   private boolean toggle;
   /** Creates a new arm. */
   public arm() {
     //init those objects from before
-    brakes = new Solenoid(null, Constants.BREAK_SOLENOID);
-    leftArm = new CANSparkMax(Constants.MOTER7, MotorType.kBrushless);
-    rightArm = new CANSparkMax(Constants.MOTER8, MotorType.kBrushless);
+    brakes = new Solenoid(null, Constants.solenoidConstants.BREAK_SOLENOID);
+    leftArm = new CANSparkMax(Constants.motorConstants.MOTER7, MotorType.kBrushless);
+    rightArm = new CANSparkMax(Constants.motorConstants.MOTER8, MotorType.kBrushless);
+    translationalArm = new CANSparkMax(Constants.motorConstants.MOTER9, MotorType.kBrushed);
     toggle = false;
   }
 
@@ -41,13 +43,23 @@ public class arm extends SubsystemBase {
       brakes.set(toggle);
     }
     else if (mode.equalsIgnoreCase("FORWARD")){
-      leftArm.set(-Constants.ARM_SPEED);
-      rightArm.set(Constants.ARM_SPEED);
+      leftArm.set(-Constants.speedConstants.ARM_SPEED);
+      rightArm.set(Constants.speedConstants.ARM_SPEED);
     }
     else if (mode.equalsIgnoreCase("REVERSE")){
-      leftArm.set(Constants.ARM_SPEED);
-      rightArm.set(-Constants.ARM_SPEED);
+      leftArm.set(Constants.speedConstants.ARM_SPEED);
+      rightArm.set(-Constants.speedConstants.ARM_SPEED);
 
     }
+    
+
+    }
+    public void translationalArmMove(String mode){
+      if(mode.equalsIgnoreCase("Forward")){
+        translationalArm.set(Constants.speedConstants.ARM_SPEED);
+      }
+      else if(mode.equalsIgnoreCase("Reverse")){
+        translationalArm.set(-Constants.speedConstants.ARM_SPEED);
+      }
   }
 }

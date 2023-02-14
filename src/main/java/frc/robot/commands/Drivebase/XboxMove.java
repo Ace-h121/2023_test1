@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Drivebase;
 
 
 import frc.robot.subsystems.Drivebase;
@@ -48,9 +48,9 @@ public class XboxMove extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    turn = Controls.Axis(Controls.Driver, Constants.XBOX_AXIS_LEFT_X);
-    Throttle = Controls.Axis(Controls.Driver, Constants.XBOX_AXIS_RIGHT_TRIGGER);
-    reverse = Controls.Axis(Controls.Driver, Constants.XBOX_AXIS_LEFT_TRIGGER);
+    turn = Controls.Axis(Controls.Driver, Constants.Axes.XBOX_AXIS_LEFT_X);
+    Throttle = Controls.Axis(Controls.Driver, Constants.Axes.XBOX_AXIS_RIGHT_TRIGGER);
+    reverse = Controls.Axis(Controls.Driver, Constants.Axes.XBOX_AXIS_LEFT_TRIGGER);
 
     if(brake){
       left = 0;
@@ -59,13 +59,13 @@ public class XboxMove extends CommandBase {
 
   else{
     //Turning right
-  if(turn > Constants.AXIS_THRESHOLD){
+  if(turn > Constants.xboxConstants.AXIS_THRESHOLD){
       //Makes left slow down by a factor of how far the axis is pushed. 
     left = (Throttle - reverse);
     right = (Throttle - reverse) * (1 - turn);
   }
     //Turning left
-  else if(turn < (-1 * Constants.AXIS_THRESHOLD)){
+  else if(turn < (-1 * Constants.xboxConstants.AXIS_THRESHOLD)){
       //Makes right speed up by a factor of how far the axis is pushed. 
     left = (Throttle - reverse) * (1 + turn);
     right = (Throttle - reverse);

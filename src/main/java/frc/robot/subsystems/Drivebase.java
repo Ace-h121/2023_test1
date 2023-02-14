@@ -32,11 +32,11 @@ public class Drivebase extends SubsystemBase {
   private RelativeEncoder rightEncoders[];
   */
   public Drivebase() {
-    leftDrive1 = new CANSparkMax(Constants.MOTER1, MotorType.kBrushless);
-    leftDrive2 = new CANSparkMax(Constants.MOTER2, MotorType.kBrushless); 
+    leftDrive1 = new CANSparkMax(Constants.motorConstants.MOTER1, MotorType.kBrushless);
+    leftDrive2 = new CANSparkMax(Constants.motorConstants.MOTER2, MotorType.kBrushless); 
     // leftDrive3 = new CANSparkMax(Constants.MOTER3, MotorType.kBrushless);
-    rightDrive1 = new CANSparkMax(Constants.MOTER3, MotorType.kBrushless); 
-    rightDrive2 = new CANSparkMax(Constants.MOTER4, MotorType.kBrushless);
+    rightDrive1 = new CANSparkMax(Constants.motorConstants.MOTER3, MotorType.kBrushless); 
+    rightDrive2 = new CANSparkMax(Constants.motorConstants.MOTER4, MotorType.kBrushless);
    // rightDrive3 = new CANSparkMax(Constants.MOTER6, MotorType.kBrushless);
     leftDrives = new MotorControllerGroup(leftDrive1, leftDrive2);
     rightDrives = new MotorControllerGroup(rightDrive1, rightDrive2);
@@ -68,10 +68,11 @@ public class Drivebase extends SubsystemBase {
   public static void drive(double left, double right){
     ourDrive.tankDrive(left, right);
   }
-  public void Getaxis(){
-  System.out.println("X axis:" + Gyro.getRoll());
-  System.out.println("Y axis:" + Gyro.getPitch());
-  System.out.println("Z axis:" + Gyro.getYaw());
+  public double Getaxis(){
+    return Gyro.getAngle();
+
+  // System.out.println("Y axis:" + Gyro.getPitch());
+
   }
  /* 
   public void resetEncoders() {
@@ -81,6 +82,7 @@ public class Drivebase extends SubsystemBase {
     }
   }
 */
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

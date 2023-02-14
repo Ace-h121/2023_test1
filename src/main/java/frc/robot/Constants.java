@@ -13,7 +13,7 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  //All motor constants
+  public final class motorConstants{
   public static final int MOTER1 = 1;
   public final static int MOTER2 = 3;
   public final static int MOTER3 = 5;
@@ -22,20 +22,22 @@ public final class Constants {
   // public final static int MOTER6 = 6;
   public final static int MOTER7 = 7;
   public static final int MOTER8 = 8;
+  public static final int MOTER9 = 9;
+  }
 
-  // Solenoid constants
+  public final class solenoidConstants{
   public static final int BREAK_SOLENOID = 0;
   public static final int LEFT_CLAW_SOLENOID = 1;
   public static final int RIGHT_CLAW_SOLENOID = 2;
-
-  // xbox constants
+  }
+  public final class xboxConstants{
   public final static int DRIVER_PORT = 0;
   public final static int OPERATOR_PORT = 1;
   public static final double AXIS_THRESHOLD = 0.25;
   public static final int XBOX_CONTROLLER_DRIVER = 0;
   public static final int XBOX_CONTROLLER_OPERATOR = 1;
-
-   // Buttons
+  }
+  public final class Buttons{
   public static final int XBOX_BUTTON_A = 1;
   public static final int XBOX_BUTTON_B = 2;
   public static final int XBOX_BUTTON_X = 3;
@@ -46,19 +48,29 @@ public final class Constants {
   public static final int XBOX_BUTTON_START = 8;
   public static final int XBOX_BUTTON_L3 = 9;
   public static final int XBOX_BUTTON_R3 = 10;
+  }
 
-  // Axes
+  public final class Axes{
   public static final int XBOX_AXIS_LEFT_X = 0;
   public static final int XBOX_AXIS_LEFT_Y = 1;
   public static final int XBOX_AXIS_LEFT_TRIGGER = 2;
   public static final int XBOX_AXIS_RIGHT_TRIGGER = 3;
   public static final int XBOX_AXIS_RIGHT_X = 4;
   public static final int XBOX_AXIS_RIGHT_Y = 5;
-
-  //Drive Sensitivities
+  }
+  public final class Sensitivity{
   public static final double DRIVE_SENSITIVITY_PRECISION = 0.5;
   public static final double DRIVE_SENSITIVITY_DEFAULT = 1;
   public static final double SPIN_SENSITIVITY = 0.8;
+  }
+  public final class speedConstants{
   public static final double ARM_SPEED = 1;
+  public static final double BALANCE_SPEED = 1; 
+  }
 
+  //Balancing constants
+  public static final double ANGLE_THRESHOLD = 10;
+
+  //speed constants 
+  
 }
