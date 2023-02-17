@@ -28,7 +28,7 @@ public class Balance extends CommandBase {
   @Override
   public void execute() {
     if (drivebase.Getaxis() > Constants.ANGLE_THRESHOLD || drivebase.Getaxis() < -Constants.ANGLE_THRESHOLD){
-      drivebase.drive(Constants.speedConstants.BALANCE_SPEED * -1 * Math.abs(drivebase.Getaxis()), Constants.speedConstants.BALANCE_SPEED * -1 * Math.abs(drivebase.Getaxis()));
+      drivebase.drive(Constants.speedConstants.BALANCE_SPEED * -drivebase.Getaxis(), Constants.speedConstants.BALANCE_SPEED * -drivebase.Getaxis());
     }
   }
 

@@ -3,12 +3,12 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands.Arm;
-
+/* 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.arm;
 
 public class translationalArmForward extends CommandBase {
-  /** Creates a new translationalArmForward. */
+  /** Creates a new translationalArmForward. 
   arm Arm;
   public translationalArmForward(arm m_Arm) {
     Arm = m_Arm;
@@ -36,3 +36,4 @@ public class translationalArmForward extends CommandBase {
     return false;
   }
 }
+*/

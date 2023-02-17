@@ -16,7 +16,7 @@ public final class Constants {
   public final class motorConstants{
   public static final int MOTER1 = 1;
   public final static int MOTER2 = 3;
-  public final static int MOTER3 = 5;
+  public final static int MOTER3 = 3;
   public final static int MOTER4 = 2;
   // public final static int MOTER5 = 4;
   // public final static int MOTER6 = 6;
@@ -33,7 +33,7 @@ public final class Constants {
   public final class xboxConstants{
   public final static int DRIVER_PORT = 0;
   public final static int OPERATOR_PORT = 1;
-  public static final double AXIS_THRESHOLD = 0.25;
+  public static final double AXIS_THRESHOLD = 0;
   public static final int XBOX_CONTROLLER_DRIVER = 0;
   public static final int XBOX_CONTROLLER_OPERATOR = 1;
   }
@@ -69,7 +69,7 @@ public final class Constants {
   }
 
   //Balancing constants
-  public static final double ANGLE_THRESHOLD = 10;
+  public static final double ANGLE_THRESHOLD = 0;
 
   //speed constants 
   

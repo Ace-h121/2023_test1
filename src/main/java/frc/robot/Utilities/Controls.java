@@ -13,7 +13,7 @@ import frc.robot.Constants;
 
 /** Add your docs here. */
 public class Controls { 
-    public static XboxController Driver = new XboxController(Constants.xboxConstants.DRIVER_PORT);
+    public static XboxController driver = new XboxController(Constants.xboxConstants.DRIVER_PORT);
     private final static CommandXboxController operator = new CommandXboxController(Constants.xboxConstants.OPERATOR_PORT);
     // binding the buttons to themselves
 
@@ -26,8 +26,8 @@ public class Controls {
 
 
 // method for getting the 
-public static double Axis(XboxController controller, int axis){
-   return controller.getRawAxis(axis);
+public static double Axis(int axis){
+   return driver.getRawAxis(axis);
 }
 
 }

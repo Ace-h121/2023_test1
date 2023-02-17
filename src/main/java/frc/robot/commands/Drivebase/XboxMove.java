@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class XboxMove extends CommandBase {
 
   double Throttle; 
-  boolean brake;
+  boolean brake = false; 
 
 
   double turn;
@@ -42,23 +42,17 @@ public class XboxMove extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Shuffleboard.addEventMarker(getName(), null);
+   // Shuffleboard.addEventMarker(getName(), null);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    turn = Controls.Axis(Controls.Driver, Constants.Axes.XBOX_AXIS_LEFT_X);
-    Throttle = Controls.Axis(Controls.Driver, Constants.Axes.XBOX_AXIS_RIGHT_TRIGGER);
-    reverse = Controls.Axis(Controls.Driver, Constants.Axes.XBOX_AXIS_LEFT_TRIGGER);
+    turn = Controls.Axis(Constants.Axes.XBOX_AXIS_LEFT_X);
+    Throttle = Controls.Axis(Constants.Axes.XBOX_AXIS_RIGHT_TRIGGER);
+    reverse = Controls.Axis(Constants.Axes.XBOX_AXIS_LEFT_TRIGGER);
 
-    if(brake){
-      left = 0;
-      right = 0;
-    }
-
-  else{
-    //Turning right
+ 
   if(turn > Constants.xboxConstants.AXIS_THRESHOLD){
       //Makes left slow down by a factor of how far the axis is pushed. 
     left = (Throttle - reverse);
@@ -78,7 +72,7 @@ public class XboxMove extends CommandBase {
   }
   Drivebase.drive(left, right);
 }
-}
+
 
 
 

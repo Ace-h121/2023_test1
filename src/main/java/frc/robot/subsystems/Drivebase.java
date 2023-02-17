@@ -33,13 +33,13 @@ public class Drivebase extends SubsystemBase {
   */
   public Drivebase() {
     leftDrive1 = new CANSparkMax(Constants.motorConstants.MOTER1, MotorType.kBrushless);
-    leftDrive2 = new CANSparkMax(Constants.motorConstants.MOTER2, MotorType.kBrushless); 
+   // leftDrive2 = new CANSparkMax(Constants.motorConstants.MOTER2, MotorType.kBrushless); 
     // leftDrive3 = new CANSparkMax(Constants.MOTER3, MotorType.kBrushless);
     rightDrive1 = new CANSparkMax(Constants.motorConstants.MOTER3, MotorType.kBrushless); 
-    rightDrive2 = new CANSparkMax(Constants.motorConstants.MOTER4, MotorType.kBrushless);
+   // rightDrive2 = new CANSparkMax(Constants.motorConstants.MOTER4, MotorType.kBrushless);
    // rightDrive3 = new CANSparkMax(Constants.MOTER6, MotorType.kBrushless);
-    leftDrives = new MotorControllerGroup(leftDrive1, leftDrive2);
-    rightDrives = new MotorControllerGroup(rightDrive1, rightDrive2);
+    leftDrives = new MotorControllerGroup(leftDrive1);
+    rightDrives = new MotorControllerGroup(rightDrive1);
     ourDrive = new DifferentialDrive(leftDrives, rightDrives);
 
 /* 
@@ -60,7 +60,7 @@ public class Drivebase extends SubsystemBase {
 */
 
     leftDrive1.setInverted(true);
-    leftDrive2.setInverted(true);
+    // leftDrive2.setInverted(true);
    // leftDrive3.setInverted(true);
 
 
