@@ -32,10 +32,10 @@ public class Drivebase extends SubsystemBase {
   private RelativeEncoder rightEncoders[];
   */
   public Drivebase() {
-    leftDrive1 = new CANSparkMax(Constants.motorConstants.MOTER1, MotorType.kBrushless);
+    leftDrive1 = new CANSparkMax(Constants.motorConstants.MOTER1, MotorType.kBrushed);
    // leftDrive2 = new CANSparkMax(Constants.motorConstants.MOTER2, MotorType.kBrushless); 
     // leftDrive3 = new CANSparkMax(Constants.MOTER3, MotorType.kBrushless);
-    rightDrive1 = new CANSparkMax(Constants.motorConstants.MOTER3, MotorType.kBrushless); 
+    rightDrive1 = new CANSparkMax(Constants.motorConstants.MOTER2, MotorType.kBrushed); 
    // rightDrive2 = new CANSparkMax(Constants.motorConstants.MOTER4, MotorType.kBrushless);
    // rightDrive3 = new CANSparkMax(Constants.MOTER6, MotorType.kBrushless);
     leftDrives = new MotorControllerGroup(leftDrive1);

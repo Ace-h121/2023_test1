@@ -48,9 +48,9 @@ public class XboxMove extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    turn = Controls.Axis(Constants.Axes.XBOX_AXIS_LEFT_X);
-    Throttle = Controls.Axis(Constants.Axes.XBOX_AXIS_RIGHT_TRIGGER);
-    reverse = Controls.Axis(Constants.Axes.XBOX_AXIS_LEFT_TRIGGER);
+    turn = Controls.driver.getLeftX();
+    Throttle = Controls.driver.getRightTriggerAxis();
+    reverse = Controls.driver.getLeftTriggerAxis();
 
  
   if(turn > Constants.xboxConstants.AXIS_THRESHOLD){
