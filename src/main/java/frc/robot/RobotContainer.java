@@ -17,6 +17,7 @@ import frc.robot.subsystems.Drivebase;
  // import frc.robot.subsystems.arm;
 // import frc.robot.subsystems.claw;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -29,8 +30,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
-  private final Drivebase m_driveBase = new Drivebase();
-  private final XboxMove drive = new XboxMove(m_driveBase);
+  private final static Drivebase m_driveBase = new Drivebase();
   // private final claw Claw = new claw();
   // private final arm Arm = new arm();
 
@@ -42,7 +42,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     
-    m_driveBase.setDefaultCommand(drive);
+
   }
 
   /**
@@ -57,6 +57,7 @@ public class RobotContainer {
   private void configureBindings() {
     Controls.yButton.whileTrue(new Balance(m_driveBase));
 
+    
   }
 
 
@@ -70,4 +71,12 @@ public class RobotContainer {
     // An example command will be run in autonomous
     return null;
   }
+  public static Drivebase getDrivebase(){
+    return m_driveBase;
+  }
+  /* 
+   public Arm getArm(){
+    return m_arm
+  }
+  */
 }

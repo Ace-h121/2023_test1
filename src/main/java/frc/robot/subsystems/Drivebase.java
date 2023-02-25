@@ -8,43 +8,45 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-
+import frc.robot.commands.Drivebase.XboxMove;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
+import frc.robot.commands.Drivebase.XboxMove;
 
 public class Drivebase extends SubsystemBase {
   /** Creates a new Drivebase. */
   AHRS Gyro = new AHRS(I2C.Port.kMXP);
   CANSparkMax leftDrive1; 
   CANSparkMax leftDrive2;  
- // CANSparkMax leftDrive3;
+ CANSparkMax leftDrive3;
   CANSparkMax rightDrive1; 
   CANSparkMax rightDrive2;
-  // CANSparkMax rightDrive3;
+   CANSparkMax rightDrive3;
   MotorControllerGroup leftDrives;  
   MotorControllerGroup rightDrives;
   private static DifferentialDrive ourDrive;
 
-  /*private RelativeEncoder leftEncoders[];
+  private RelativeEncoder leftEncoders[];
   private RelativeEncoder rightEncoders[];
-  */
+  
   public Drivebase() {
-    leftDrive1 = new CANSparkMax(Constants.motorConstants.MOTER1, MotorType.kBrushed);
-   // leftDrive2 = new CANSparkMax(Constants.motorConstants.MOTER2, MotorType.kBrushless); 
-    // leftDrive3 = new CANSparkMax(Constants.MOTER3, MotorType.kBrushless);
-    rightDrive1 = new CANSparkMax(Constants.motorConstants.MOTER2, MotorType.kBrushed); 
-   // rightDrive2 = new CANSparkMax(Constants.motorConstants.MOTER4, MotorType.kBrushless);
-   // rightDrive3 = new CANSparkMax(Constants.MOTER6, MotorType.kBrushless);
-    leftDrives = new MotorControllerGroup(leftDrive1);
-    rightDrives = new MotorControllerGroup(rightDrive1);
+    leftDrive1 = new CANSparkMax(Constants.motorConstants.MOTER1, MotorType.kBrushless);
+   leftDrive2 = new CANSparkMax(Constants.motorConstants.MOTER2, MotorType.kBrushless); 
+    leftDrive3 = new CANSparkMax(Constants.motorConstants.MOTER3, MotorType.kBrushless);
+    rightDrive1 = new CANSparkMax(Constants.motorConstants.MOTER4, MotorType.kBrushless); 
+   rightDrive2 = new CANSparkMax(Constants.motorConstants.MOTER5, MotorType.kBrushless);
+   rightDrive3 = new CANSparkMax(Constants.motorConstants.MOTER6, MotorType.kBrushless);
+    leftDrives = new MotorControllerGroup(leftDrive1, leftDrive2, leftDrive3);
+    rightDrives = new MotorControllerGroup(rightDrive1, rightDrive2, rightDrive3);
     ourDrive = new DifferentialDrive(leftDrives, rightDrives);
 
-/* 
-    leftEncoders =  new RelativeEncoder[2];
-    rightEncoders = new RelativeEncoder[2];
+
+    leftEncoders =  new RelativeEncoder[3];
+    rightEncoders = new RelativeEncoder[3];
     leftEncoders[0] = leftDrive1.getEncoder();
     leftEncoders[1] = leftDrive2.getEncoder();
     leftEncoders[2] = leftDrive3.getEncoder();
@@ -56,16 +58,16 @@ public class Drivebase extends SubsystemBase {
     leftEncoders[2].setPositionConversionFactor(100/21);
     rightEncoders[0].setPositionConversionFactor(100/21);
     rightEncoders[1].setPositionConversionFactor(100/21);
-    rightEncoders[3].setPositionConversionFactor(100/21);
-*/
+    rightEncoders[2].setPositionConversionFactor(100/21);
+
 
     leftDrive1.setInverted(true);
-    // leftDrive2.setInverted(true);
-   // leftDrive3.setInverted(true);
+   leftDrive2.setInverted(true);
+   leftDrive3.setInverted(true);
 
 
   }
-  public static void drive(double left, double right){
+  public void drive(double left, double right){
     ourDrive.tankDrive(left, right);
   }
   public double Getaxis(){
@@ -74,17 +76,18 @@ public class Drivebase extends SubsystemBase {
   // System.out.println("Y axis:" + Gyro.getPitch());
 
   }
- /* 
+  
   public void resetEncoders() {
     for (int i = 0; i < leftEncoders.length; i++) {
       leftEncoders[i].setPosition(0);
      rightEncoders[i].setPosition(0);
     }
   }
-*/
+
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    setDefaultCommand(new XboxMove(RobotContainer.getDrivebase()));
   }
 }
