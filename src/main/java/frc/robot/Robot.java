@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Utilities.Controls;
 
 
 
@@ -26,7 +27,14 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+  double Throttle; 
+  boolean brake = false; 
 
+
+  double turn;
+  double reverse;
+  double left;
+  double right;
   private RobotContainer m_robotContainer;
 
   /**
@@ -64,7 +72,10 @@ public class Robot extends TimedRobot {
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
-    CommandScheduler.getInstance().run();
+  
+
+   CommandScheduler.getInstance().run();
+    
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -106,8 +117,35 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     CommandScheduler.getInstance().run();
-  
+   System.out.print(RobotContainer.getDrivebase().Getaxis());
+    
+    turn = Controls.driver.getLeftX();
+    Throttle = Controls.driver.getRightTriggerAxis();
+    reverse = Controls.driver.getLeftTriggerAxis();
+
+ 
+  if(turn > Constants.xboxConstants.AXIS_THRESHOLD){
+      //Makes left slow down by a factor of how far the axis is pushed. 
+    left = (Throttle - reverse);
+    right = (Throttle - reverse) * (1 - turn);
   }
+    //Turning left
+  else if(turn < (-1 * Constants.xboxConstants.AXIS_THRESHOLD)){
+      //Makes right speed up by a factor of how far the axis is pushed. 
+    left = (Throttle - reverse) * (1 + turn);
+    right = (Throttle - reverse);
+  }
+    //Driving straight 
+  else{
+      //No joystick manipulation. 
+    left = (Throttle - reverse);
+    right = (Throttle - reverse);
+  }
+  RobotContainer.getDrivebase().drive(left, right);
+}
+  
+  
+  
 
   @Override
   public void testInit() {

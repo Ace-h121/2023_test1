@@ -9,12 +9,16 @@ import frc.robot.subsystems.Drivebase;
 
 
 import frc.robot.Constants;
-
+import frc.robot.RobotContainer;
 import frc.robot.Utilities.Controls;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
+
+//THIS FILE CURRENTLY DOES NOTHING 
+
+
 public class XboxMove extends CommandBase {
 
   double Throttle; 
@@ -48,6 +52,7 @@ public class XboxMove extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // System.out.print(drivebase.Getaxis());
     turn = Controls.driver.getLeftX();
     Throttle = Controls.driver.getRightTriggerAxis();
     reverse = Controls.driver.getLeftTriggerAxis();
@@ -70,7 +75,7 @@ public class XboxMove extends CommandBase {
     left = (Throttle - reverse);
     right = (Throttle - reverse);
   }
-  Drivebase.drive(left, right);
+  drivebase.drive(left, right);
 }
 
 
@@ -79,7 +84,7 @@ public class XboxMove extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Drivebase.drive(0, 0);
+    drivebase.drive(0, 0);
   }
 
   // Returns true when the command should end.
