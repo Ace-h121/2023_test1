@@ -9,6 +9,8 @@ import java.nio.file.Path;
 
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
+import edu.wpi.first.wpilibj.AddressableLED;
+import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -26,15 +28,20 @@ import frc.robot.Utilities.Controls;
  * project.
  */
 public class Robot extends TimedRobot {
+
+
+    
   private Command m_autonomousCommand;
+  
+  //drive stuff
   double Throttle; 
   boolean brake = false; 
-
-
   double turn;
   double reverse;
   double left;
   double right;
+
+
   private RobotContainer m_robotContainer;
 
   /**
@@ -45,6 +52,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+
+    //auto stuff
     m_robotContainer = new RobotContainer();
     String trajectoryJSON = "paths/Unnamed.wpilib.json";
     Trajectory trajectory = new Trajectory();
@@ -53,6 +62,9 @@ public class Robot extends TimedRobot {
       trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
    } catch (IOException ex) {
       DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+
+
+
    }
     
   }
@@ -168,4 +180,8 @@ public class Robot extends TimedRobot {
   public void simulationPeriodic() {
     
   }
-}
+
+
+  }
+
+
