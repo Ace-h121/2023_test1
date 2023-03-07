@@ -15,11 +15,14 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import frc.robot.Utilities.Controls;
-
+import frc.robot.subsystems.Drivebase;
+import frc.robot.commands.Drivebase.XboxMove;
 
 
 
@@ -29,23 +32,10 @@ import frc.robot.Utilities.Controls;
  * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
-public class Robot extends TimedRobot {
-
-
-    
+public class Robot extends TimedRobot { 
   private Command m_autonomousCommand;
-  
-  //drive stuff
-  public XboxController driver = new XboxController(0);
-  double Throttle; 
-  boolean brake = false; 
-  double turn;
-  double reverse;
-  double left;
-  double right;
-
-
   private RobotContainer m_robotContainer;
+
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -55,10 +45,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-
-    //auto stuff
     m_robotContainer = new RobotContainer();
-    
   }
 
 
@@ -76,10 +63,7 @@ public class Robot extends TimedRobot {
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
-  
-
    CommandScheduler.getInstance().run();
-    
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -93,7 +77,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -114,19 +97,21 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-
   }
+  double Throttle; 
+  boolean brake = false; 
 
-  /** This function is called periodically during operator control. */
+
+  double turn;
+  double reverse;
+  double left;
+  double right;
+
   @Override
   public void teleopPeriodic() {
-    //XBOX Move Dupe
-    turn = driver.getLeftX();
-    Throttle = driver.getRightTriggerAxis();
-    reverse = driver.getLeftTriggerAxis();
-
-    
-
+    turn = Controls.driver.getLeftX();
+    Throttle = Controls.driver.getRightTriggerAxis();
+    reverse = Controls.driver.getLeftTriggerAxis();
 
  
   if(turn > Constants.xboxConstants.AXIS_THRESHOLD){
@@ -146,15 +131,13 @@ public class Robot extends TimedRobot {
     left = (Throttle - reverse);
     right = (Throttle - reverse);
   }
+  SmartDashboard.putNumber("Throttle",Throttle);
+  SmartDashboard.putNumber("Left Motor", left);
+  SmartDashboard.putNumber("Right Motor", right);
 
-  //DEBUGGING CODE
-  SmartDashboard.putNumber("Throttle", Throttle);
-  SmartDashboard.putNumber("Left motor", left);
-  SmartDashboard.putNumber("Right number", right);
-  //setting motor speed
   RobotContainer.getDrivebase().drive(left, right);
+
 }
-  
   
   
 

@@ -22,10 +22,10 @@ public class Drivebase extends SubsystemBase {
   AHRS Gyro = new AHRS(I2C.Port.kMXP);
   CANSparkMax leftDrive1; 
   CANSparkMax leftDrive2;  
- CANSparkMax leftDrive3;
+  CANSparkMax leftDrive3;
   CANSparkMax rightDrive1; 
   CANSparkMax rightDrive2;
-   CANSparkMax rightDrive3;
+  CANSparkMax rightDrive3;
   MotorControllerGroup leftDrives;  
   MotorControllerGroup rightDrives;
   private static DifferentialDrive ourDrive;
@@ -34,15 +34,21 @@ public class Drivebase extends SubsystemBase {
   private RelativeEncoder rightEncoders[];
   
   public Drivebase() {
+
   leftDrive1 = new CANSparkMax(Constants.motorConstants.MOTER1, MotorType.kBrushed);
   leftDrive2 = new CANSparkMax(Constants.motorConstants.MOTER2, MotorType.kBrushed); 
-    //leftDrive3 = new CANSparkMax(Constants.motorConstants.MOTER3, MotorType.kBrushless);
+  //leftDrive3 = new CANSparkMax(Constants.motorConstants.MOTER3, MotorType.kBrushless);
   rightDrive1 = new CANSparkMax(Constants.motorConstants.MOTER3, MotorType.kBrushed); 
   rightDrive2 = new CANSparkMax(Constants.motorConstants.MOTER4, MotorType.kBrushed);
-   //rightDrive3 = new CANSparkMax(Constants.motorConstants.MOTER6, MotorType.kBrushless);
-    leftDrives = new MotorControllerGroup(leftDrive1);
-    rightDrives = new MotorControllerGroup(rightDrive1);
+  //rightDrive3 = new CANSparkMax(Constants.motorConstants.MOTER6, MotorType.kBrushless);
+    leftDrives = new MotorControllerGroup(leftDrive1, leftDrive2);
+    rightDrives = new MotorControllerGroup(rightDrive1, rightDrive2);
     ourDrive = new DifferentialDrive(leftDrives, rightDrives);
+
+
+
+
+
 
 /* 
     leftEncoders =  new RelativeEncoder[3];
@@ -57,11 +63,12 @@ public class Drivebase extends SubsystemBase {
     rightEncoders[2].setPositionConversionFactor(100/21);
 */
 
-    leftDrive1.setInverted(true);
+    leftDrives.setInverted(true);
+
 
   }
   public void drive(double left, double right){
-    ourDrive.arcadeDrive(left, right);
+    ourDrive.tankDrive(left, right);
   }
   public double Getaxis(){
     return Gyro.getAngle();
