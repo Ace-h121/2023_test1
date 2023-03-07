@@ -14,8 +14,8 @@ package frc.robot;
  */
 public final class Constants {
   public final class motorConstants{
-  public static final int MOTER1 = 1;
-  public final static int MOTER2 = 2;
+  public static final int MOTER1 = 2;
+  public final static int MOTER2 = 1;
   public final static int MOTER3 = 3;
   public final static int MOTER4 = 4;
    public final static int MOTER5 = 5;

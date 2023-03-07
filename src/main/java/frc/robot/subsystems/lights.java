@@ -28,7 +28,7 @@ public class lights extends SubsystemBase {
     length =- length;
     }
     else{
-    ledBuffer.setHSV(ledBuffer.getLength(), h, s, v ); 
+    ledBuffer.setHSV(length, h, s, v ); 
     length =+ 1;   
     } 
   }

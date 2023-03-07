@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Utilities.Controls;
@@ -34,6 +36,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   
   //drive stuff
+  public XboxController driver = new XboxController(0);
   double Throttle; 
   boolean brake = false; 
   double turn;
@@ -55,17 +58,6 @@ public class Robot extends TimedRobot {
 
     //auto stuff
     m_robotContainer = new RobotContainer();
-    String trajectoryJSON = "paths/Unnamed.wpilib.json";
-    Trajectory trajectory = new Trajectory();
-    try {
-      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-   } catch (IOException ex) {
-      DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
-
-
-
-   }
     
   }
 
@@ -128,12 +120,13 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    CommandScheduler.getInstance().run();
-   System.out.print(RobotContainer.getDrivebase().Getaxis());
+    //XBOX Move Dupe
+    turn = driver.getLeftX();
+    Throttle = driver.getRightTriggerAxis();
+    reverse = driver.getLeftTriggerAxis();
+
     
-    turn = Controls.driver.getLeftX();
-    Throttle = Controls.driver.getRightTriggerAxis();
-    reverse = Controls.driver.getLeftTriggerAxis();
+
 
  
   if(turn > Constants.xboxConstants.AXIS_THRESHOLD){
@@ -153,6 +146,12 @@ public class Robot extends TimedRobot {
     left = (Throttle - reverse);
     right = (Throttle - reverse);
   }
+
+  //DEBUGGING CODE
+  SmartDashboard.putNumber("Throttle", Throttle);
+  SmartDashboard.putNumber("Left motor", left);
+  SmartDashboard.putNumber("Right number", right);
+  //setting motor speed
   RobotContainer.getDrivebase().drive(left, right);
 }
   
