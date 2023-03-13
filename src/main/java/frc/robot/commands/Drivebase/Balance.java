@@ -27,8 +27,8 @@ public class Balance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (drivebase.Getaxis() > Constants.ANGLE_THRESHOLD || drivebase.Getaxis() < -Constants.ANGLE_THRESHOLD){
-      drivebase.drive(Constants.speedConstants.BALANCE_SPEED * -drivebase.Getaxis(), Constants.speedConstants.BALANCE_SPEED * -drivebase.Getaxis());
+    if (drivebase.getAxis() > Constants.ANGLE_THRESHOLD || drivebase.getAxis() < -Constants.ANGLE_THRESHOLD){
+      drivebase.drive(Constants.speedConstants.BALANCE_SPEED * -drivebase.getAxis(), Constants.speedConstants.BALANCE_SPEED * -drivebase.getAxis());
     }
   }
 

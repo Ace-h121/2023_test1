@@ -31,7 +31,7 @@ public class XboxMove extends CommandBase {
   double right;
   /**   
    * Creates a new ExampleCommand.
-   *
+   *  
    * @param subsystem The subsystem used by this command.
    */
   private final Drivebase drivebase;

@@ -26,10 +26,6 @@ public class Controls {
     // buttons for throttle and break
 
 
-// method for getting the 
-public static double Axis(int axis){
-   return driver.getRawAxis(axis);
-}
 
 }
 

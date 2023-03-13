@@ -41,11 +41,19 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
+  String trajectoryJSON = "paths.Unnamed.wpilib.json";
+  Trajectory trajectory = new Trajectory();
   @Override
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    try {
+      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+   } catch (IOException ex) {
+      DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+   }
   }
 
 
@@ -76,12 +84,13 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    m_robotContainer.getDrivebase().resetEncoders();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
-  }
+  } 
 
   /** This function is called periodically during autonomous. */
   @Override
@@ -96,46 +105,71 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-
+    m_robotContainer = new RobotContainer();
   }
-  double Throttle; 
-  boolean brake = false; 
 
 
+
+// values 
   double turn;
   double reverse;
+  double throttle; 
   double left;
   double right;
-
+  double percision;
+  boolean rotate;
+  boolean brake;
   @Override
   public void teleopPeriodic() {
     turn = Controls.driver.getLeftX();
-    Throttle = Controls.driver.getRightTriggerAxis();
+    throttle = Controls.driver.getRightTriggerAxis();
     reverse = Controls.driver.getLeftTriggerAxis();
+    rotate = Controls.driver.getLeftStickButton();
+    brake = Controls.driver.getRightBumper();
 
+    if(Controls.driver.getLeftBumper()){
+      percision = Constants.xboxConstants.PERCISION;
+    }
+    else{
+      percision = 1;
+    }
  
-  if(turn > Constants.xboxConstants.AXIS_THRESHOLD){
+    if(turn > Constants.xboxConstants.AXIS_THRESHOLD){
       //Makes left slow down by a factor of how far the axis is pushed. 
-    left = (Throttle - reverse);
-    right = (Throttle - reverse) * (1 - turn);
-  }
+      left = (throttle - reverse) *(1 - turn) * percision;
+      right = (throttle - reverse) * percision; 
+   }
+
     //Turning left
-  else if(turn < (-1 * Constants.xboxConstants.AXIS_THRESHOLD)){
+    else if(turn < (-1 * Constants.xboxConstants.AXIS_THRESHOLD)){
       //Makes right speed up by a factor of how far the axis is pushed. 
-    left = (Throttle - reverse) * (1 + turn);
-    right = (Throttle - reverse);
-  }
+      left = (throttle - reverse) * percision;
+      right = (throttle - reverse) * (1 + turn) * percision;
+   }
+
     //Driving straight 
-  else{
+    else{
       //No joystick manipulation. 
-    left = (Throttle - reverse);
-    right = (Throttle - reverse);
-  }
-  SmartDashboard.putNumber("Throttle",Throttle);
+      left = (throttle - reverse) * percision;
+      right = (throttle - reverse) * percision;
+    }
+
+    if(rotate){
+     if(Math.abs(turn) > Constants.xboxConstants.AXIS_THRESHOLD){
+        left = -turn;
+        right = turn;
+     } 
+    }
+    if(brake){
+      left = 0;
+      right = 0;
+     }
+    //shuffleboard tabs
+  SmartDashboard.putNumber("Throttle",throttle);
   SmartDashboard.putNumber("Left Motor", left);
   SmartDashboard.putNumber("Right Motor", right);
-
-  RobotContainer.getDrivebase().drive(left, right);
+    // setting drivebase speed 
+    m_robotContainer.getDrivebase().drive(left, right);
 
 }
   
